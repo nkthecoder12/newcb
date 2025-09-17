@@ -57,6 +57,8 @@ const VisionaryPhoenixAcademy = () => {
     course: ''
   });
 
+  const [isProcessing, setIsProcessing] = useState(false);
+
   // Icon mapping for courses (fallback for display)
   const courseIcons = {
     'Ethical Hacking': { icon: Bug, color: 'text-red-500', bgColor: 'bg-red-50' },
@@ -146,6 +148,11 @@ const VisionaryPhoenixAcademy = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     
+    // Prevent double submission
+    if (isProcessing) return;
+    
+    setIsProcessing(true);
+    
     try {
       // Load Razorpay script first
       await loadRazorpayScript();
@@ -183,11 +190,13 @@ const VisionaryPhoenixAcademy = () => {
           },
           async (paymentData: any) => {
             // Success callback - payment verification is handled in razorpay.ts
+            setIsProcessing(false);
             navigate('/success');
           },
           (error: any) => {
             // Failure callback
             console.error('Payment failed:', error);
+            setIsProcessing(false);
             navigate('/failure');
           }
         );
@@ -195,10 +204,12 @@ const VisionaryPhoenixAcademy = () => {
         // Reset form after payment is initiated
         setFormData({ name: '', email: '', phone: '', course: '' });
       } else {
+        setIsProcessing(false);
         throw new Error('Enrollment failed');
       }
     } catch (error) {
       console.error('Error submitting enrollment:', error);
+      setIsProcessing(false);
       alert('Something went wrong. Please try again.');
     }
   };
@@ -528,10 +539,23 @@ const VisionaryPhoenixAcademy = () => {
                     </select>
                   </div>
                   <button
+                    type="submit"
                     onClick={handleSubmit}
-                    className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 rounded-lg text-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105"
+                    disabled={isProcessing}
+                    className={`w-full py-4 rounded-lg text-lg font-semibold transition-all transform ${
+                      isProcessing 
+                        ? 'bg-gray-400 cursor-not-allowed' 
+                        : 'bg-gradient-to-r from-orange-500 to-red-500 text-white hover:shadow-xl hover:scale-105'
+                    }`}
                   >
-                    Enroll Now
+                    {isProcessing ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <Loader className="w-5 h-5 animate-spin" />
+                        Processing...
+                      </div>
+                    ) : (
+                      'Enroll Now'
+                    )}
                   </button>
                 </div>
               </div>
