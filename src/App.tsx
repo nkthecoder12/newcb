@@ -310,12 +310,6 @@ const VisionaryPhoenixAcademy = () => {
               >
                 Enroll Now <ArrowRight className="w-5 h-5" />
               </button>
-              <button 
-                onClick={() => scrollToSection('enroll')}
-                className="border-2 border-orange-500 text-orange-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-orange-500 hover:text-white transition-all"
-              >
-                Enroll
-              </button>
             </div>
           </div>
         </div>
