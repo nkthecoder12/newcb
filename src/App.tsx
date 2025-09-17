@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { loadRazorpayScript, initiateRazorpayPayment } from './utils/razorpay';
 import { useNavigate } from 'react-router-dom';
+import vpaIcon from './assets/vpa icon.png';
 // Payment imports kept for future use
 // import { fetchCourses } from './utils/api';
 // import { initiateEnrollment } from './utils/api';
@@ -228,9 +229,9 @@ const VisionaryPhoenixAcademy = () => {
             {/* Logo */}
             <div className="flex items-center space-x-3">
               <img 
-                src="vpa_logo.png"
+                src={vpaIcon}
                 alt="VP Academy Logo"
-                className="w-12 h-12"
+                className="w-12 h-12 object-contain"
               />
               <div>
                 <h1 className="text-xl font-bold text-gray-800">Visionary Phoenix</h1>
