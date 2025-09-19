@@ -74,12 +74,12 @@ const VisionaryPhoenixAcademy = () => {
   useEffect(() => {
     // Set static course data
     setCourses([
-      { _id: '1', name: 'Ethical Hacking', price: 15000, description: 'Master ethical hacking with hands-on training from industry experts.' },
-      { _id: '2', name: 'Cybersecurity', price: 12000, description: 'Master cybersecurity with hands-on training from industry experts.' },
-      { _id: '3', name: 'SOC Analyst', price: 10000, description: 'Master SOC analyst skills with hands-on training from industry experts.' },
-      { _id: '4', name: 'CCNA', price: 8000, description: 'Master CCNA with hands-on training from industry experts.' },
-      { _id: '5', name: 'Java', price: 6000, description: 'Master Java with hands-on training from industry experts.' },
-      { _id: '6', name: 'Python', price: 5000, description: 'Master Python with hands-on training from industry experts.' }
+      { _id: '1', name: 'Ethical Hacking', price: 10000, description: 'Master ethical hacking with hands-on training from industry experts.' },
+      { _id: '2', name: 'Cybersecurity', price: 10000, description: 'Master cybersecurity with hands-on training from industry experts.' },
+      { _id: '3', name: 'SOC Analyst', price: 12000, description: 'Master SOC analyst skills with hands-on training from industry experts.' },
+      { _id: '4', name: 'CCNA', price: 10000, description: 'Master CCNA with hands-on training from industry experts.' },
+      { _id: '5', name: 'Java', price: 8000, description: 'Master Java with hands-on training from industry experts.' },
+      { _id: '6', name: 'Python', price: 8000, description: 'Master Python with hands-on training from industry experts.' }
     ]);
     setLoading(false);
   }, []);
