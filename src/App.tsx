@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { 
   Menu, 
   X, 
-  BookOpen, 
-  Users, 
-  Award, 
   Phone, 
   Mail, 
   MapPin, 
-  ChevronRight,
   Shield, 
   Code, 
   Network, 
@@ -24,6 +20,9 @@ import {
 import { loadRazorpayScript, initiateRazorpayPayment } from './utils/razorpay';
 import { useNavigate } from 'react-router-dom';
 import vpaIcon from './assets/vpa icon.png';
+import ImageSlideshow from './components/ImageSlideshow';
+import cyber1 from './assets/cyber1.jpg';
+import cyber2 from './assets/cyber2.jpg';
 // Payment imports kept for future use
 // import { fetchCourses } from './utils/api';
 // import { initiateEnrollment } from './utils/api';
@@ -174,7 +173,7 @@ const VisionaryPhoenixAcademy = () => {
       
       if (response.ok) {
         const result = await response.json();
-        console.log('Enrollment successful:', result);
+      
         
         // Initialize Razorpay payment with order details
         await initiateRazorpayPayment(
@@ -189,7 +188,7 @@ const VisionaryPhoenixAcademy = () => {
             email: formData.email,
             phone: formData.phone
           },
-          async (paymentData: any) => {
+          async () => {
             // Success callback - payment verification is handled in razorpay.ts
             setIsProcessing(false);
             navigate('/success');
@@ -407,13 +406,22 @@ const VisionaryPhoenixAcademy = () => {
       {/* About Us Section */}
       <section id="about" className="py-20 px-4 bg-white">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-12 text-center">
               About <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Us</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="text-left">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Why Choose Visionary Phoenix Academy?</h3>
+            
+            {/* Image Slideshow */}
+            <div className="mb-12 max-w-4xl mx-auto">
+              <ImageSlideshow 
+                images={[cyber1, cyber2]} 
+                interval={3000}
+              />
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-gray-800">Why Choose Visionary Phoenix Academy?</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
@@ -432,13 +440,50 @@ const VisionaryPhoenixAcademy = () => {
                     <p className="text-gray-600">Industry-recognized certifications</p>
                   </div>
                 </div>
+                
+                <div className="mt-8 p-6 bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl text-white">
+                  <h4 className="text-xl font-bold mb-3">Our Mission</h4>
+                  <p className="text-blue-100 leading-relaxed">
+                    To empower the next generation of cybersecurity professionals with cutting-edge skills, 
+                    practical knowledge, and the confidence to lead in an ever-evolving digital landscape.
+                  </p>
+                </div>
               </div>
-              <div className="bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl p-8 text-white">
-                <h4 className="text-xl font-bold mb-4">Our Mission</h4>
-                <p className="text-orange-100 leading-relaxed">
-                  To empower the next generation of cybersecurity professionals with cutting-edge skills, 
-                  practical knowledge, and the confidence to lead in an ever-evolving digital landscape.
-                </p>
+              
+              <div className="space-y-6">
+                <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                  <h3 className="text-xl font-bold text-gray-800 mb-4">Our Approach</h3>
+                  <p className="text-gray-600 mb-4">
+                    At Visionary Phoenix Academy, we believe in learning by doing. Our curriculum is designed to provide hands-on experience with real-world scenarios, ensuring you're job-ready from day one.
+                  </p>
+                  <p className="text-gray-600">
+                    Our state-of-the-art facilities and industry-standard tools create an immersive learning environment that mirrors real cybersecurity challenges.
+                  </p>
+                </div>
+                
+                <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100">
+                  <h3 className="text-xl font-bold text-orange-800 mb-4">Success Stories</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Shield className="w-5 h-5 text-orange-500" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-800">1000+ Students Trained</p>
+                        <p className="text-sm text-gray-600">in cybersecurity and ethical hacking</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-800">90% Placement Rate</p>
+                        <p className="text-sm text-gray-600">in top cybersecurity firms</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

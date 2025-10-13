@@ -98,7 +98,10 @@ export const initiateRazorpayPayment = async (
       // Modal configuration
       modal: {
         ondismiss: function() {
-          console.log('Payment modal closed by user');
+          // Log only in development to avoid console noise in production
+          if (import.meta && import.meta.env && import.meta.env.DEV) {
+            console.log('Payment modal closed by user');
+          }
           onFailure(new Error('Payment cancelled by user'));
         }
       }

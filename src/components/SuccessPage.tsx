@@ -1,13 +1,27 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, MessageCircle, Home } from 'lucide-react';
-import { config } from '../config';
+
 
 const SuccessPage = () => {
   const navigate = useNavigate();
 
   const handleWhatsAppRedirect = () => {
-    window.open(config.WHATSAPP_GROUP_LINK, '_blank');
+    // Prefer opening WhatsApp app on mobile, fallback to web invite
+    const inviteWeb = 'https://chat.whatsapp.com/KL2tyedQGHWJUc83ij8G0J';
+    const inviteApp = 'whatsapp://chat?code=KL2tyedQGHWJUc83ij8G0J';
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Try to open the WhatsApp app first
+      setTimeout(() => {
+        // Fallback to web link if app didn't open
+        window.location.href = inviteWeb;
+      }, 1200);
+      window.location.href = inviteApp;
+    } else {
+      // Desktop: open WhatsApp Web invite (requires WhatsApp Web login)
+      window.location.href = inviteWeb;
+    }
   };
 
   const handleGoHome = () => {
@@ -41,6 +55,31 @@ const SuccessPage = () => {
             <MessageCircle className="w-5 h-5" />
             Join WhatsApp Group
           </button>
+          {/* Fallback direct link in case button is blocked by browser */}
+          <p className="text-sm text-gray-500">
+            Having trouble? Use this link:
+            {' '}
+            <a
+              href="https://chat.whatsapp.com/KL2tyedQGHWJUc83ij8G0J"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 underline hover:text-green-700"
+            >
+              Open WhatsApp Group
+            </a>
+          </p>
+          <p className="text-xs text-gray-500">
+            Tip: On desktop, ensure you are logged in to <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" className="underline">WhatsApp Web</a> or have the WhatsApp Desktop app installed. On mobile, the app should open automatically.
+          </p>
+          <p className="text-xs text-gray-500">
+            Direct app link (mobile):{' '}
+            <a
+              href="whatsapp://chat?code=KL2tyedQGHWJUc83ij8G0J"
+              className="text-green-600 underline hover:text-green-700"
+            >
+              Open in WhatsApp App
+            </a>
+          </p>
 
           {/* Home Button */}
           <button
