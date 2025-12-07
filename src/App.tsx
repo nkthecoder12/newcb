@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { loadRazorpayScript, initiateRazorpayPayment } from './utils/razorpay';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import vpaIcon from './assets/vpa icon.png';
 import ImageSlideshow from './components/ImageSlideshow';
 import cyber1 from './assets/cyber1.jpg';
@@ -58,6 +59,30 @@ const VisionaryPhoenixAcademy = () => {
   });
 
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const orgSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Visionary Phoenix Academy',
+    url: typeof window !== 'undefined' ? window.location.origin : undefined,
+    logo: undefined,
+    sameAs: [
+      'https://instagram.com/visionary_phoenix_official'
+    ],
+    contactPoint: [{
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      telephone: '+91-8220397552',
+      email: 'visionaryphoenixacademy@gmail.com'
+    }],
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '1st floor, Mettupalayam Road, next to petrol bunk, Periyanaickenpalayam',
+      addressRegion: 'Tamil Nadu',
+      postalCode: '641020',
+      addressCountry: 'IN'
+    }
+  } as const;
 
   // Icon mapping for courses (fallback for display)
   const courseIcons = {
@@ -221,6 +246,14 @@ const VisionaryPhoenixAcademy = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <Helmet>
+        <title>Visionary Phoenix Academy | Cybersecurity & Tech Training</title>
+        <meta name="description" content="Transform your career with cutting-edge cybersecurity, ethical hacking, SOC analyst, CCNA, Java and Python training. Hands-on learning and 100% placement support." />
+        <meta property="og:title" content="Visionary Phoenix Academy" />
+        <meta property="og:description" content="Rise like a phoenix in the digital world with industry-led training and placement support." />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(orgSchema)}</script>
+      </Helmet>
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -229,7 +262,12 @@ const VisionaryPhoenixAcademy = () => {
             <div className="flex items-center space-x-3">
               <img 
                 src={vpaIcon}
-                alt="VP Academy Logo"
+                alt="Visionary Phoenix Academy logo"
+                width={48}
+                height={48}
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="w-12 h-12 object-contain"
               />
               <div>

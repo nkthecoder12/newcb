@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, MessageCircle, Home } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 
 const SuccessPage = () => {
@@ -30,6 +31,12 @@ const SuccessPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center px-4">
+      <Helmet>
+        <title>Payment Successful | Visionary Phoenix Academy</title>
+        <meta name="description" content="Your payment was successful. Join our WhatsApp group for course updates and materials." />
+        <meta property="og:title" content="Payment Successful" />
+        <meta property="og:description" content="Welcome aboard! Next steps and group invite inside." />
+      </Helmet>
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
         {/* Success Icon */}
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">

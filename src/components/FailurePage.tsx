@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { XCircle, RefreshCw, Home } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 const FailurePage = () => {
   const navigate = useNavigate();
@@ -14,6 +15,12 @@ const FailurePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center px-4">
+      <Helmet>
+        <title>Payment Failed | Visionary Phoenix Academy</title>
+        <meta name="description" content="Your payment could not be processed. Try again or contact support for assistance." />
+        <meta property="og:title" content="Payment Failed" />
+        <meta property="og:description" content="We couldn't process your payment. You can retry or reach our support." />
+      </Helmet>
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
         {/* Error Icon */}
         <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">

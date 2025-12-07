@@ -63,6 +63,9 @@ const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
       <img 
         src={images[currentIndex]}
         alt="Cybersecurity program slide"
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         onError={(e) => {
           console.error('Slideshow image failed to load:', images[currentIndex]);
           (e.currentTarget as HTMLImageElement).style.opacity = '0.2';
