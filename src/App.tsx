@@ -110,9 +110,9 @@ const VisionaryPhoenixAcademy = () => {
 
   // Warm up backend to avoid cold start delay
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/health`).catch(() => {});
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/health`).catch(() => {});
   }, []);
-
+console.log(import.meta.env.VITE_API_BASE_URL)
   const jobOpportunities = [
     'SOC Analyst',
     'Penetration Tester',
