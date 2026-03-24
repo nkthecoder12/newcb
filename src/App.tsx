@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Menu, 
-  X, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Shield, 
-  Code, 
-  Network, 
-  Bug, 
-  Coffee, 
+import {
+  Menu,
+  X,
+  Phone,
+  Mail,
+  MapPin,
+  Shield,
+  Code,
+  Network,
+  Bug,
+  Coffee,
   Search,
   Instagram,
   Star,
@@ -43,7 +43,7 @@ const VisionaryPhoenixAcademy = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   // const [enrolling, setEnrolling] = useState<string | null>(null); // For future payment integration
-  
+
   interface FormData {
     name: string;
     email: string;
@@ -110,9 +110,9 @@ const VisionaryPhoenixAcademy = () => {
 
   // Warm up backend to avoid cold start delay
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/health`).catch(() => {});
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/health`).catch(() => { });
   }, []);
-console.log(import.meta.env.VITE_API_BASE_URL)
+  console.log(import.meta.env.VITE_API_BASE_URL)
   const jobOpportunities = [
     'SOC Analyst',
     'Penetration Tester',
@@ -177,12 +177,12 @@ console.log(import.meta.env.VITE_API_BASE_URL)
 
   const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    
+
     // Prevent double submission
     if (isProcessing) return;
-    
+
     setIsProcessing(true);
-    
+
     try {
       // Load Razorpay script first
       await loadRazorpayScript();
@@ -200,11 +200,11 @@ console.log(import.meta.env.VITE_API_BASE_URL)
           course: formData.course
         })
       });
-      
+
       if (response.ok) {
         const result = await response.json();
-      
-        
+
+
         // Initialize Razorpay payment with order details
         await initiateRazorpayPayment(
           {
@@ -230,7 +230,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
             navigate('/failure');
           }
         );
-        
+
         // Reset form after payment is initiated
         setFormData({ name: '', email: '', phone: '', course: '' });
       } else {
@@ -265,7 +265,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex items-center space-x-3">
-              <img 
+              <img
                 src={vpaIcon}
                 alt="Visionary Phoenix Academy logo"
                 width={48}
@@ -298,7 +298,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
             </nav>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
@@ -342,17 +342,9 @@ console.log(import.meta.env.VITE_API_BASE_URL)
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed">
-              Transform your career with cutting-edge cybersecurity and technology training. 
+              Transform your career with cutting-edge cybersecurity and technology training.
               Rise like a phoenix in the digital world.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => scrollToSection('enroll')}
-                className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-              >
-                Enroll Now <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -379,27 +371,21 @@ console.log(import.meta.env.VITE_API_BASE_URL)
               {courses.map((course, index) => {
                 const courseIcon = courseIcons[course.name as keyof typeof courseIcons] || { icon: Code, color: 'text-blue-500', bgColor: 'bg-blue-50' };
                 const IconComponent = courseIcon.icon;
-                
+
                 return (
                   <div key={course._id || index} className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 p-8 border border-gray-100">
                     <div className={`w-16 h-16 ${courseIcon.bgColor} rounded-2xl flex items-center justify-center mb-6`}>
                       <IconComponent className={`w-8 h-8 ${courseIcon.color}`} />
                     </div>
                     <h3 className="text-2xl font-bold text-gray-800 mb-4">{course.name}</h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 mb-6">
                       {course.description || `Master ${course.name.toLowerCase()} with hands-on training from industry experts.`}
                     </p>
-                    {course.price && (
-                      <div className="mb-6">
-                        <span className="text-3xl font-bold text-orange-500">₹{course.price.toLocaleString()}</span>
-                        <span className="text-gray-500 ml-2">/ course</span>
-                      </div>
-                    )}
                     <button 
                       onClick={() => handleEnrollment(course.name)}
                       className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-xl font-semibold hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
                     >
-                      Enroll Now <ArrowRight className="w-4 h-4" />
+                      Interested <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
                 );
@@ -436,7 +422,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
             <p className="text-blue-100 text-lg mb-6">
               Average salary range: ₹4,00,000 - ₹25,00,000+ per annum
             </p>
-            <button 
+            <button
               onClick={() => scrollToSection('enroll')}
               className="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105"
             >
@@ -453,15 +439,15 @@ console.log(import.meta.env.VITE_API_BASE_URL)
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-12 text-center">
               About <span className="bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">Us</span>
             </h2>
-            
+
             {/* Image Slideshow */}
             <div className="mb-12 max-w-4xl mx-auto">
-              <ImageSlideshow 
-                images={[cyber1, cyber2]} 
+              <ImageSlideshow
+                images={[cyber1, cyber2]}
                 interval={3000}
               />
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               <div className="space-y-6">
                 <h3 className="text-2xl font-bold text-gray-800">Why Choose Visionary Phoenix Academy?</h3>
@@ -483,16 +469,16 @@ console.log(import.meta.env.VITE_API_BASE_URL)
                     <p className="text-gray-600">Industry-recognized certifications</p>
                   </div>
                 </div>
-                
+
                 <div className="mt-8 p-6 bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl text-white">
                   <h4 className="text-xl font-bold mb-3">Our Mission</h4>
                   <p className="text-blue-100 leading-relaxed">
-                    To empower the next generation of cybersecurity professionals with cutting-edge skills, 
+                    To empower the next generation of cybersecurity professionals with cutting-edge skills,
                     practical knowledge, and the confidence to lead in an ever-evolving digital landscape.
                   </p>
                 </div>
               </div>
-              
+
               <div className="space-y-6">
                 <div className="bg-gray-50 p-6 rounded-2xl border border-gray-100">
                   <h3 className="text-xl font-bold text-gray-800 mb-4">Our Approach</h3>
@@ -503,7 +489,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
                     Our state-of-the-art facilities and industry-standard tools create an immersive learning environment that mirrors real cybersecurity challenges.
                   </p>
                 </div>
-                
+
                 <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100">
                   <h3 className="text-xl font-bold text-orange-800 mb-4">Success Stories</h3>
                   <div className="space-y-4">
@@ -625,11 +611,10 @@ console.log(import.meta.env.VITE_API_BASE_URL)
                     type="submit"
                     onClick={handleSubmit}
                     disabled={isProcessing}
-                    className={`w-full py-4 rounded-lg text-lg font-semibold transition-all transform ${
-                      isProcessing 
-                        ? 'bg-gray-400 cursor-not-allowed' 
+                    className={`w-full py-4 rounded-lg text-lg font-semibold transition-all transform ${isProcessing
+                        ? 'bg-gray-400 cursor-not-allowed'
                         : 'bg-gradient-to-r from-orange-500 to-red-500 text-white hover:shadow-xl hover:scale-105'
-                    }`}
+                      }`}
                   >
                     {isProcessing ? (
                       <div className="flex items-center justify-center gap-2">
@@ -637,7 +622,7 @@ console.log(import.meta.env.VITE_API_BASE_URL)
                         Processing...
                       </div>
                     ) : (
-                      'Enroll Now'
+                      'Interested'
                     )}
                   </button>
                 </div>
